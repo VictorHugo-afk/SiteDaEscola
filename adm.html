@@ -3,17 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduAdmin Pro - Gestão Escolar</title>
+    <title>Curso Técnico em Administração</title>
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
-            --danger-color: #e74c3c;
-            --warning-color: #f39c12;
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -24,943 +15,396 @@
         body {
             background-color: #f5f5f5;
             color: #333;
+            line-height: 1.6;
         }
         
         .container {
-            display: flex;
-            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background-color: var(--dark-color);
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             color: white;
             padding: 20px 0;
-            transition: all 0.3s;
-        }
-        
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .sidebar-header h3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .sidebar-header h3 i {
-            color: var(--secondary-color);
-        }
-        
-        .sidebar-menu {
-            padding: 20px 0;
-        }
-        
-        .menu-item {
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .menu-item.active {
-            background-color: var(--primary-color);
-        }
-        
-        .menu-item i {
-            width: 20px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            background-color: var(--light-color);
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .header h2 {
-            color: var(--dark-color);
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+        .logo {
+            font-size: 2.5rem;
             font-weight: bold;
+            margin-bottom: 10px;
         }
         
-        /* Dashboard Cards */
-        .dashboard-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
         
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card-header {
+        .tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            background-color: #2c3e50;
             justify-content: center;
-            font-size: 24px;
+        }
+        
+        .tab-button {
+            padding: 15px 25px;
+            background-color: #2c3e50;
             color: white;
-        }
-        
-        .card-icon.students {
-            background-color: var(--primary-color);
-        }
-        
-        .card-icon.teachers {
-            background-color: var(--secondary-color);
-        }
-        
-        .card-icon.classes {
-            background-color: var(--warning-color);
-        }
-        
-        .card-icon.payments {
-            background-color: var(--danger-color);
-        }
-        
-        .card-value {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .card-title {
-            color: #777;
-            font-size: 14px;
-        }
-        
-        /* Tables */
-        .table-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        
-        th {
-            background-color: #f9f9f9;
-            font-weight: 600;
-            color: #555;
-        }
-        
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .status {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .status.active {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .status.inactive {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        
-        .btn {
-            padding: 8px 16px;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
         
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
+        .tab-button:hover {
+            background-color: #34495e;
         }
         
-        .btn-primary:hover {
-            background-color: #2980b9;
+        .tab-button.active {
+            background-color: #e74c3c;
+            font-weight: bold;
         }
         
-        .btn-danger {
-            background-color: var(--danger-color);
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-        
-        /* Modal */
-        .modal {
+        .tab-content {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
+            padding: 30px;
             background-color: white;
-            border-radius: 8px;
-            width: 500px;
-            max-width: 90%;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+            margin-bottom: 30px;
         }
         
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h2 {
+            color: #2c3e50;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid #e74c3c;
         }
         
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #777;
+        h3 {
+            color: #e74c3c;
+            margin: 15px 0 10px;
         }
         
-        .form-group {
-            margin-bottom: 15px;
+        .info-card {
+            background-color: #f9f9f9;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #555;
+        .subject-list, .job-list {
+            list-style-type: none;
         }
         
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
+        .subject-list li, .job-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
         }
         
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
+        .subject-list li:before, .job-list li:before {
+            content: "•";
+            color: #e74c3c;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
         }
         
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
+        .highlight {
+            background-color: #fff4f4;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ffdddd;
+            margin: 20px 0;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-            }
-            
-            .dashboard-cards {
-                grid-template-columns: 1fr;
-            }
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
         }
         
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background-color: var(--secondary-color);
+        footer {
+            background-color: #2c3e50;
             color: white;
-            border-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: none;
-            z-index: 1001;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
         }
         
-        .notification.show {
-            display: block;
-            animation: fadeIn 0.3s ease-out;
+        @media (max-width: 768px) {
+            .tab-button {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="logo">Curso Técnico em Administração</div>
+            <div class="subtitle">Formação profissional completa para o mercado de trabalho</div>
+        </div>
+    </header>
+    
+    <div class="tabs">
+        <div class="container">
+            <button class="tab-button active" onclick="openTab('sobre')">Sobre o Curso</button>
+            <button class="tab-button" onclick="openTab('carga')">Carga Horária</button>
+            <button class="tab-button" onclick="openTab('materias')">Matérias</button>
+            <button class="tab-button" onclick="openTab('capacidade')">Capacidade</button>
+            <button class="tab-button" onclick="openTab('reduzidas')">Matérias Reduzidas</button>
+            <button class="tab-button" onclick="openTab('turno')">Turnos</button>
+            <button class="tab-button" onclick="openTab('requisitos')">Requisitos</button>
+            <button class="tab-button" onclick="openTab('campo')">Aulas de Campo</button>
+            <button class="tab-button" onclick="openTab('empregos')">Oportunidades</button>
+        </div>
+    </div>
+    
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <h3><i class="fas fa-graduation-cap"></i> EduAdmin Pro</h3>
+        <div id="sobre" class="tab-content active">
+            <h2>Sobre o Curso</h2>
+            <p>O Curso Técnico em Administração oferece formação profissional para atuação em diversos segmentos do mercado de trabalho. Nosso programa combina teoria e prática para preparar os alunos para os desafios do mundo empresarial.</p>
+            
+            <div class="highlight">
+                <p>O curso é ideal para quem busca ingressar rapidamente no mercado de trabalho ou para profissionais que desejam se qualificar para assumir novas responsabilidades em sua carreira.</p>
             </div>
-            <div class="sidebar-menu">
-                <div class="menu-item active" onclick="showSection('dashboard')">
-                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                </div>
-                <div class="menu-item" onclick="showSection('students')">
-                    <i class="fas fa-users"></i> Alunos
-                </div>
-                <div class="menu-item" onclick="showSection('teachers')">
-                    <i class="fas fa-chalkboard-teacher"></i> Professores
-                </div>
-                <div class="menu-item" onclick="showSection('classes')">
-                    <i class="fas fa-book"></i> Turmas
-                </div>
-                <div class="menu-item" onclick="showSection('subjects')">
-                    <i class="fas fa-book-open"></i> Disciplinas
-                </div>
-                <div class="menu-item" onclick="showSection('grades')">
-                    <i class="fas fa-star"></i> Notas
-                </div>
-                <div class="menu-item" onclick="showSection('attendance')">
-                    <i class="fas fa-clipboard-check"></i> Frequência
-                </div>
-                <div class="menu-item" onclick="showSection('finance')">
-                    <i class="fas fa-money-bill-wave"></i> Financeiro
-                </div>
-                <div class="menu-item" onclick="showSection('reports')">
-                    <i class="fas fa-chart-bar"></i> Relatórios
-                </div>
-                <div class="menu-item" onclick="showSection('settings')">
-                    <i class="fas fa-cog"></i> Configurações
-                </div>
+            
+            <h3>Diferenciais do Nosso Curso</h3>
+            <ul class="subject-list">
+                <li>Professores com experiência de mercado</li>
+                <li>Infraestrutura moderna e adequada para o aprendizado</li>
+                <li>Metodologia que combina teoria e prática</li>
+                <li>Parcerias com empresas para estágios</li>
+                <li>Aulas de campo em ambientes reais de trabalho</li>
+            </ul>
+        </div>
+        
+        <div id="carga" class="tab-content">
+            <h2>Carga Horária</h2>
+            <div class="info-card">
+                <p><strong>Duração:</strong> 3 anos</p>
+                <p><strong>Carga horária total:</strong> 3000 horas</p>
+            </div>
+            
+            <p>Nossa carga horária é distribuída de forma equilibrada entre:</p>
+            <ul class="subject-list">
+                <li>Disciplinas teóricas fundamentais</li>
+                <li>Atividades práticas e laboratoriais</li>
+                <li>Aulas de campo e visitas técnicas</li>
+                <li>Projetos interdisciplinares</li>
+                <li>Estágio supervisionado</li>
+            </ul>
+            
+            <p>A distribuição da carga horária ao longo dos 3 anos permite um aprendizado progressivo e consolidado, garantindo que os alunos absorvam completamente os conteúdos antes de avançar para tópicos mais complexos.</p>
+        </div>
+        
+        <div id="materias" class="tab-content">
+            <h2>Matérias do Curso</h2>
+            <p>O currículo do curso é composto por disciplinas cuidadosamente selecionadas para fornecer uma formação completa em administração. As principais matérias incluem:</p>
+            
+            <h3>Matérias Técnicas Principais</h3>
+            <ul class="subject-list">
+                <li><strong>Administração Financeira e Orçamentária</strong> - Estudo das finanças empresariais, elaboração e controle de orçamentos</li>
+                <li><strong>Tecnologias e Ferramentas de Gestão</strong> - Uso de softwares e sistemas de gestão empresarial</li>
+                <li><strong>Introdução à Economia</strong> - Fundamentos da micro e macroeconomia aplicados aos negócios</li>
+                <li><strong>Liderança e Gestão de Pessoas</strong> - Técnicas de gestão de equipes e desenvolvimento de liderança</li>
+                <li><strong>Introdução ao Marketing</strong> - Princípios de marketing, pesquisa de mercado e estratégias comerciais</li>
+            </ul>
+            
+            <h3>Outras Disciplinas Relevantes</h3>
+            <ul class="subject-list">
+                <li>Gestão de Processos</li>
+                <li>Contabilidade Básica</li>
+                <li>Direito Empresarial</li>
+                <li>Gestão de Projetos</li>
+                <li>Empreendedorismo</li>
+                <li>Logística e Cadeia de Suprimentos</li>
+            </ul>
+        </div>
+        
+        <div id="capacidade" class="tab-content">
+            <h2>Capacidade de Alunos</h2>
+            <div class="info-card">
+                <p><strong>Vagas por turma:</strong> 25 a 26 alunos</p>
+            </div>
+            
+            <p>Limitamos intencionalmente o número de alunos por turma para garantir:</p>
+            <ul class="subject-list">
+                <li>Atendimento individualizado aos estudantes</li>
+                <li>Melhor interação entre alunos e professores</li>
+                <li>Ambiente de aprendizagem mais produtivo</li>
+                <li>Infraestrutura adequada sem superlotação</li>
+                <li>Maior aproveitamento das atividades práticas</li>
+            </ul>
+            
+            <p>Essa capacidade permite que os professores conheçam cada aluno individualmente, identifiquem suas dificuldades e potencialidades e possam oferecer um acompanhamento mais personalizado.</p>
+        </div>
+        
+        <div id="reduzidas" class="tab-content">
+            <h2>Matérias com Carga Horária Reduzida</h2>
+            <p>Algumas disciplinas têm carga horária adaptada para focar nas competências essenciais do curso técnico:</p>
+            
+            <ul class="subject-list">
+                <li><strong>Arte</strong> - 40 horas (ênfase em criatividade aplicada aos negócios)</li>
+                <li><strong>Filosofia</strong> - 40 horas (foco em ética empresarial)</li>
+                <li><strong>Sociologia</strong> - 40 horas (ênfase em relações de trabalho e organizações)</li>
+                <li><strong>História</strong> - 40 horas (foco na história econômica e empresarial)</li>
+                <li><strong>Projeto de Vida</strong> - 40 horas (planejamento de carreira e desenvolvimento pessoal)</li>
+            </ul>
+            
+            <div class="highlight">
+                <p>Embora estas disciplinas tenham carga horária reduzida em comparação com o ensino regular, seus conteúdos foram adaptados para atender especificamente às necessidades da formação em administração, mantendo a qualidade e relevância para a profissão.</p>
             </div>
         </div>
         
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Dashboard Section -->
-            <div id="dashboard-section" class="content-section">
-                <div class="header">
-                    <h2>Dashboard</h2>
-                    <div class="user-info">
-                        <div class="user-avatar">AD</div>
-                        <span>Admin</span>
-                    </div>
-                </div>
-                
-                <div class="dashboard-cards">
-                    <div class="card fade-in" style="animation-delay: 0.1s;">
-                        <div class="card-header">
-                            <div>
-                                <div class="card-value" id="students-count">0</div>
-                                <div class="card-title">Alunos</div>
-                            </div>
-                            <div class="card-icon students">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card fade-in" style="animation-delay: 0.2s;">
-                        <div class="card-header">
-                            <div>
-                                <div class="card-value" id="teachers-count">0</div>
-                                <div class="card-title">Professores</div>
-                            </div>
-                            <div class="card-icon teachers">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card fade-in" style="animation-delay: 0.3s;">
-                        <div class="card-header">
-                            <div>
-                                <div class="card-value" id="classes-count">0</div>
-                                <div class="card-title">Turmas</div>
-                            </div>
-                            <div class="card-icon classes">
-                                <i class="fas fa-book"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card fade-in" style="animation-delay: 0.4s;">
-                        <div class="card-header">
-                            <div>
-                                <div class="card-value" id="payments-due">R$ 0</div>
-                                <div class="card-title">Pagamentos Pendentes</div>
-                            </div>
-                            <div class="card-icon payments">
-                                <i class="fas fa-money-bill-wave"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="table-container fade-in" style="animation-delay: 0.5s;">
-                    <h3>Últimos Alunos Cadastrados</h3>
-                    <table id="recent-students">
-                        <thead>
-                            <tr>
-                                <th>Matrícula</th>
-                                <th>Nome</th>
-                                <th>Turma</th>
-                                <th>Data de Cadastro</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dados serão preenchidos via JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
+        <div id="turno" class="tab-content">
+            <h2>Turnos de Funcionamento</h2>
+            <div class="info-card">
+                <p><strong>Manhã:</strong> 08:00 às 12:00</p>
+                <p><strong>Noite:</strong> 19:00 às 23:00</p>
+                <p class="warning">Turno da tarde: Em desenvolvimento</p>
             </div>
             
-            <!-- Students Section (hidden by default) -->
-            <div id="students-section" class="content-section" style="display: none;">
-                <div class="header">
-                    <h2>Gerenciamento de Alunos</h2>
-                    <div>
-                        <button class="btn btn-primary" onclick="openStudentModal()">
-                            <i class="fas fa-plus"></i> Novo Aluno
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="table-container">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                        <div>
-                            <input type="text" id="student-search" class="form-control" placeholder="Pesquisar aluno..." style="width: 300px;">
-                        </div>
-                        <div>
-                            <button class="btn btn-primary">
-                                <i class="fas fa-filter"></i> Filtrar
-                            </button>
-                            <button class="btn">
-                                <i class="fas fa-download"></i> Exportar
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <table id="students-table">
-                        <thead>
-                            <tr>
-                                <th>Matrícula</th>
-                                <th>Nome</th>
-                                <th>Data Nasc.</th>
-                                <th>Turma</th>
-                                <th>Responsável</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dados serão preenchidos via JavaScript -->
-                        </tbody>
-                    </table>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                        <div>
-                            Mostrando <span id="students-showing">0</span> de <span id="students-total">0</span> alunos
-                        </div>
-                        <div>
-                            <button class="btn" id="students-prev">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="btn" id="students-next">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <h3>Vantagens de Cada Turno</h3>
+            <p><strong>Turno da Manhã:</strong></p>
+            <ul class="subject-list">
+                <li>Ideal para quem prefere estudar com a mente fresca</li>
+                <li>Possibilidade de trabalhar à tarde/noite</li>
+                <li>Melhor aproveitamento para atividades que exigem concentração</li>
+            </ul>
+            
+            <p><strong>Turno da Noite:</strong></p>
+            <ul class="subject-list">
+                <li>Permite trabalhar durante o dia</li>
+                <li>Atende a estudantes que já estão no mercado de trabalho</li>
+                <li>Professores com disponibilidade de profissionais atuantes</li>
+            </ul>
+        </div>
+        
+        <div id="requisitos" class="tab-content">
+            <h2>Requisitos Básicos</h2>
+            <div class="info-card">
+                <p><strong>Escolaridade mínima:</strong> Ensino Fundamental completo (9º ano)</p>
             </div>
             
-            <!-- Outras seções seriam adicionadas aqui -->
-            <div id="teachers-section" class="content-section" style="display: none;">
-                <!-- Conteúdo dos professores -->
-            </div>
+            <h3>Documentação Necessária para Matrícula</h3>
+            <ul class="subject-list">
+                <li>Histórico escolar do Ensino Fundamental</li>
+                <li>Certificado de conclusão do Ensino Fundamental</li>
+                <li>Documento de identidade (RG) e CPF</li>
+                <li>Comprovante de residência</li>
+                <li>2 fotos 3x4</li>
+            </ul>
             
-            <div id="classes-section" class="content-section" style="display: none;">
-                <!-- Conteúdo das turmas -->
+            <h3>Perfil Desejado do Candidato</h3>
+            <p>Embora não sejam requisitos obrigatórios, os seguintes atributos são desejáveis:</p>
+            <ul class="subject-list">
+                <li>Interesse por atividades organizacionais</li>
+                <li>Habilidade para trabalhar em equipe</li>
+                <li>Capacidade de comunicação</li>
+                <li>Raciocínio lógico</li>
+                <li>Responsabilidade e comprometimento</li>
+            </ul>
+        </div>
+        
+        <div id="campo" class="tab-content">
+            <h2>Aulas de Campo</h2>
+            <p>O curso inclui visitas técnicas e aulas de campo que complementam o aprendizado em sala de aula:</p>
+            
+            <h3>Fábricas e Centros de Produção</h3>
+            <ul class="subject-list">
+                <li>Visitas a linhas de produção para compreensão de processos industriais</li>
+                <li>Análise de gestão da qualidade e controle de produção</li>
+                <li>Estudo de logística e cadeia de suprimentos in loco</li>
+                <li>Observação de práticas de segurança no trabalho</li>
+            </ul>
+            
+            <h3>Faculdades e Centros Universitários</h3>
+            <ul class="subject-list">
+                <li>Participação em palestras e eventos acadêmicos</li>
+                <li>Utilização de laboratórios e bibliotecas universitárias</li>
+                <li>Contato com professores e estudantes do ensino superior</li>
+                <li>Orientação sobre possibilidades de continuidade dos estudos</li>
+            </ul>
+            
+            <div class="highlight">
+                <p>As aulas de campo são componentes curriculares obrigatórios e estão incluídas na carga horária total do curso. Todos os custos de transporte e ingressos são cobertos pela instituição.</p>
+            </div>
+        </div>
+        
+        <div id="empregos" class="tab-content">
+            <h2>Oportunidades de Emprego</h2>
+            <p>Após a conclusão do curso, os técnicos em administração podem atuar em diversas áreas e funções, incluindo:</p>
+            
+            <h3>Principais Oportunidades</h3>
+            <ul class="job-list">
+                <li><strong>Auxiliar de Administração</strong> - Suporte às atividades administrativas em diversos departamentos</li>
+                <li><strong>Negociação e Vendas</strong> - Atuação em áreas comerciais, representação e telemarketing</li>
+                <li><strong>Auxiliar em Recursos Humanos</strong> - Suporte em processos de recrutamento, seleção e departamento pessoal</li>
+            </ul>
+            
+            <h3>Outras Oportunidades</h3>
+            <ul class="job-list">
+                <li>Assistente Financeiro</li>
+                <li>Assistente de Logística</li>
+                <li>Atendimento ao Cliente</li>
+                <li>Assistente de Marketing</li>
+                <li>Empreendedorismo (abrir próprio negócio)</li>
+            </ul>
+            
+            <div class="highlight">
+                <p>Segundo pesquisas do mercado, mais de 80% dos nossos egressos estão empregados na área em até 6 meses após a conclusão do curso, com remuneração inicial média de R$ 1.800,00.</p>
             </div>
         </div>
     </div>
     
-    <!-- Modal de Aluno -->
-    <div class="modal" id="student-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-student-title">Adicionar Novo Aluno</h3>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
-            </div>
-            <form id="student-form">
-                <input type="hidden" id="student-id">
-                
-                <div class="form-group">
-                    <label for="student-name">Nome Completo</label>
-                    <input type="text" id="student-name" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-birthdate">Data de Nascimento</label>
-                    <input type="date" id="student-birthdate" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-cpf">CPF</label>
-                    <input type="text" id="student-cpf" class="form-control" placeholder="000.000.000-00" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-email">E-mail</label>
-                    <input type="email" id="student-email" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-phone">Telefone</label>
-                    <input type="text" id="student-phone" class="form-control" placeholder="(00) 00000-0000">
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-class">Turma</label>
-                    <select id="student-class" class="form-control" required>
-                        <option value="">Selecione uma turma</option>
-                        <option value="1">1º Ano A</option>
-                        <option value="2">1º Ano B</option>
-                        <option value="3">2º Ano A</option>
-                        <option value="4">2º Ano B</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-parent">Responsável</label>
-                    <input type="text" id="student-parent" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-parent-phone">Telefone do Responsável</label>
-                    <input type="text" id="student-parent-phone" class="form-control" placeholder="(00) 00000-0000" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="student-address">Endereço</label>
-                    <input type="text" id="student-address" class="form-control">
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn" onclick="closeModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </div>
-            </form>
+    <footer>
+        <div class="container">
+            <p>Curso Técnico em Administração | Formando Profissionais para o Sucesso</p>
+            <p>Telefone: (11) 3456-7890 | Email: contato@cursoadministracao.com.br</p>
+            <p>Endereço: Rua das Empresas, 123, Centro, São Paulo - SP</p>
         </div>
-    </div>
-    
-    <!-- Notificação -->
-    <div class="notification" id="notification">
-        <span id="notification-message">Operação realizada com sucesso!</span>
-    </div>
-    
+    </footer>
+
     <script>
-        // Dados de exemplo (em um sistema real, viriam de uma API)
-        const sampleStudents = [
-            { id: 1, registration: '20230001', name: 'João Silva', birthdate: '2010-05-15', class: '1º Ano A', parent: 'Maria Silva', status: 'active' },
-            { id: 2, registration: '20230002', name: 'Ana Oliveira', birthdate: '2010-08-22', class: '1º Ano A', parent: 'Carlos Oliveira', status: 'active' },
-            { id: 3, registration: '20230003', name: 'Pedro Santos', birthdate: '2009-11-30', class: '2º Ano B', parent: 'Lucia Santos', status: 'active' },
-            { id: 4, registration: '20230004', name: 'Mariana Costa', birthdate: '2010-03-10', class: '1º Ano B', parent: 'Roberto Costa', status: 'inactive' },
-            { id: 5, registration: '20230005', name: 'Lucas Pereira', birthdate: '2009-07-18', class: '2º Ano A', parent: 'Fernanda Pereira', status: 'active' },
-        ];
-        
-        // Variáveis globais
-        let currentPage = 'dashboard';
-        let students = [...sampleStudents];
-        let currentStudentPage = 1;
-        const studentsPerPage = 10;
-        
-        // Quando o DOM estiver carregado
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializa o dashboard
-            updateDashboard();
-            
-            // Carrega a tabela de alunos
-            renderStudentsTable();
-            
-            // Configura o formulário de aluno
-            document.getElementById('student-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                saveStudent();
-            });
-            
-            // Configura a busca de alunos
-            document.getElementById('student-search').addEventListener('input', function() {
-                filterStudents(this.value);
-            });
-            
-            // Configura a paginação
-            document.getElementById('students-prev').addEventListener('click', function() {
-                if (currentStudentPage > 1) {
-                    currentStudentPage--;
-                    renderStudentsTable();
-                }
-            });
-            
-            document.getElementById('students-next').addEventListener('click', function() {
-                const totalPages = Math.ceil(students.length / studentsPerPage);
-                if (currentStudentPage < totalPages) {
-                    currentStudentPage++;
-                    renderStudentsTable();
-                }
-            });
-        });
-        
-        // Função para mostrar uma seção específica
-        function showSection(sectionId) {
-            // Esconde todas as seções
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Remove a classe active de todos os itens do menu
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Mostra a seção solicitada
-            document.getElementById(`${sectionId}-section`).style.display = 'block';
-            
-            // Adiciona a classe active ao item do menu clicado
-            const menuItems = document.querySelectorAll('.menu-item');
-            for (let i = 0; i < menuItems.length; i++) {
-                if (menuItems[i].getAttribute('onclick').includes(sectionId)) {
-                    menuItems[i].classList.add('active');
-                    break;
-                }
+        function openTab(tabId) {
+            // Esconde todos os conteúdos das abas
+            var tabContents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
             }
             
-            // Atualiza a página atual
-            currentPage = sectionId;
-            
-            // Se for a seção de alunos, atualiza a tabela
-            if (sectionId === 'students') {
-                renderStudentsTable();
-            }
-        }
-        
-        // Função para atualizar o dashboard
-        function updateDashboard() {
-            // Animação de contagem
-            animateValue('students-count', 0, 125, 1000);
-            animateValue('teachers-count', 0, 18, 1000);
-            animateValue('classes-count', 0, 8, 1000);
-            animateValue('payments-due', 0, 5240, 1000);
-            
-            // Preenche a tabela de alunos recentes
-            const tbody = document.querySelector('#recent-students tbody');
-            tbody.innerHTML = '';
-            
-            // Ordena por ID decrescente para pegar os mais recentes
-            const recentStudents = [...sampleStudents].sort((a, b) => b.id - a.id).slice(0, 5);
-            
-            recentStudents.forEach(student => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${student.registration}</td>
-                    <td>${student.name}</td>
-                    <td>${student.class}</td>
-                    <td>${formatDate(new Date())}</td>
-                    <td><span class="status ${student.status}">${student.status === 'active' ? 'Ativo' : 'Inativo'}</span></td>
-                    <td>
-                        <button class="btn" onclick="editStudent(${student.id})"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="deleteStudent(${student.id})"><i class="fas fa-trash"></i></button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-        
-        // Função para animar valores numéricos
-        function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                let value;
-                
-                if (id === 'payments-due') {
-                    value = Math.floor(progress * (end - start) + start);
-                    obj.innerHTML = `R$ ${value.toLocaleString('pt-BR')}`;
-                } else {
-                    value = Math.floor(progress * (end - start) + start);
-                    obj.innerHTML = value;
-                }
-                
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-        
-        // Função para renderizar a tabela de alunos
-        function renderStudentsTable() {
-            const tbody = document.querySelector('#students-table tbody');
-            tbody.innerHTML = '';
-            
-            const start = (currentStudentPage - 1) * studentsPerPage;
-            const end = start + studentsPerPage;
-            const paginatedStudents = students.slice(start, end);
-            
-            paginatedStudents.forEach(student => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${student.registration}</td>
-                    <td>${student.name}</td>
-                    <td>${formatDate(new Date(student.birthdate))}</td>
-                    <td>${student.class}</td>
-                    <td>${student.parent}</td>
-                    <td><span class="status ${student.status}">${student.status === 'active' ? 'Ativo' : 'Inativo'}</span></td>
-                    <td>
-                        <button class="btn" onclick="editStudent(${student.id})"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="deleteStudent(${student.id})"><i class="fas fa-trash"></i></button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-            
-            // Atualiza os controles de paginação
-            document.getElementById('students-showing').textContent = paginatedStudents.length;
-            document.getElementById('students-total').textContent = students.length;
-            
-            // Desabilita os botões de navegação quando necessário
-            document.getElementById('students-prev').disabled = currentStudentPage === 1;
-            document.getElementById('students-next').disabled = end >= students.length;
-        }
-        
-        // Função para filtrar alunos
-        function filterStudents(searchTerm) {
-            if (searchTerm.trim() === '') {
-                students = [...sampleStudents];
-            } else {
-                const term = searchTerm.toLowerCase();
-                students = sampleStudents.filter(student => 
-                    student.name.toLowerCase().includes(term) ||
-                    student.registration.toLowerCase().includes(term) ||
-                    student.class.toLowerCase().includes(term) ||
-                    student.parent.toLowerCase().includes(term)
-                );
+            // Remove a classe active de todos os botões
+            var tabButtons = document.getElementsByClassName('tab-button');
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
             }
             
-            currentStudentPage = 1;
-            renderStudentsTable();
-        }
-        
-        // Função para abrir o modal de aluno
-        function openStudentModal(studentId = null) {
-            const modal = document.getElementById('student-modal');
-            const form = document.getElementById('student-form');
-            
-            if (studentId) {
-                // Modo edição
-                document.getElementById('modal-student-title').textContent = 'Editar Aluno';
-                const student = sampleStudents.find(s => s.id === studentId);
-                
-                // Preenche o formulário com os dados do aluno
-                document.getElementById('student-id').value = student.id;
-                document.getElementById('student-name').value = student.name;
-                document.getElementById('student-birthdate').value = student.birthdate;
-                document.getElementById('student-class').value = student.class;
-                document.getElementById('student-parent').value = student.parent;
-            } else {
-                // Modo adição
-                document.getElementById('modal-student-title').textContent = 'Adicionar Novo Aluno';
-                form.reset();
-            }
-            
-            modal.style.display = 'flex';
-        }
-        
-        // Função para fechar o modal
-        function closeModal() {
-            document.getElementById('student-modal').style.display = 'none';
-        }
-        
-        // Função para salvar um aluno (adicionar ou editar)
-        function saveStudent() {
-            const form = document.getElementById('student-form');
-            const studentId = document.getElementById('student-id').value;
-            
-            // Em um sistema real, aqui faria uma requisição para a API
-            if (studentId) {
-                // Edição
-                const studentIndex = sampleStudents.findIndex(s => s.id === parseInt(studentId));
-                if (studentIndex !== -1) {
-                    sampleStudents[studentIndex] = {
-                        ...sampleStudents[studentIndex],
-                        name: document.getElementById('student-name').value,
-                        birthdate: document.getElementById('student-birthdate').value,
-                        class: document.getElementById('student-class').value,
-                        parent: document.getElementById('student-parent').value
-                    };
-                }
-                
-                showNotification('Aluno atualizado com sucesso!');
-            } else {
-                // Adição
-                const newStudent = {
-                    id: sampleStudents.length + 1,
-                    registration: `2023000${sampleStudents.length + 1}`,
-                    name: document.getElementById('student-name').value,
-                    birthdate: document.getElementById('student-birthdate').value,
-                    class: document.getElementById('student-class').value,
-                    parent: document.getElementById('student-parent').value,
-                    status: 'active'
-                };
-                
-                sampleStudents.unshift(newStudent);
-                showNotification('Aluno cadastrado com sucesso!');
-            }
-            
-            // Atualiza a lista de alunos
-            students = [...sampleStudents];
-            
-            // Fecha o modal e atualiza a tabela
-            closeModal();
-            renderStudentsTable();
-            
-            // Se estiver no dashboard, atualiza também
-            if (currentPage === 'dashboard') {
-                updateDashboard();
-            }
-        }
-        
-        // Função para editar um aluno
-        function editStudent(studentId) {
-            openStudentModal(studentId);
-        }
-        
-        // Função para deletar um aluno
-        function deleteStudent(studentId) {
-            if (confirm('Tem certeza que deseja excluir este aluno?')) {
-                // Em um sistema real, aqui faria uma requisição para a API
-                const studentIndex = sampleStudents.findIndex(s => s.id === studentId);
-                if (studentIndex !== -1) {
-                    sampleStudents.splice(studentIndex, 1);
-                    showNotification('Aluno excluído com sucesso!');
-                    
-                    // Atualiza a lista de alunos
-                    students = [...sampleStudents];
-                    renderStudentsTable();
-                    
-                    // Se estiver no dashboard, atualiza também
-                    if (currentPage === 'dashboard') {
-                        updateDashboard();
-                    }
-                }
-            }
-        }
-        
-        // Função para mostrar notificação
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            document.getElementById('notification-message').textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-        
-        // Função para formatar data
-        function formatDate(date) {
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
+            // Mostra a aba selecionada e marca o botão como active
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
     </script>
 </body>
